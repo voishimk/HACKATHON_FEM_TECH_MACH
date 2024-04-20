@@ -1,17 +1,8 @@
-# HACKATHON  FEM TECH MACH BCI 2024
-
+🚀 HACKATHON FEM TECH MACH BCI 2024 🚀
 ---
-
-## Ctrl + QUEENS
-
+👑 Ctrl + QUEENS 👑
 ---
-
-Este repositorio es parte de  los desafios presentados en la Hackathon FEM TECH, 
-de MACH este repositorio se incluye el sitema el registro de usuario, validacion,
-creación de banca virtual, recuperacion de cuentas, incluyendo las funcionalidades
-de transacciones de dinero en el diseño y considerando un diseño resposivo, test 
-unitarios y Desing System de MACH.
-
+¡Bienvenid@ al repositorio de Ctrl + QUEENS, parte de los desafíos presentados en la Hackathon FEM TECH de MACH! Aquí encontrarás el sistema completo que incluye registro de usuario, validación, creación de banca virtual, recuperación de cuentas, y todas las funcionalidades de transacciones de dinero. Además, ¡todo está diseñado considerando la responsividad, con test unitarios y el Desing System de MACH!
 ---
 ### Requisitos de Instalación
 
@@ -43,13 +34,7 @@ pip install -r requirements.txt
 python manage.py migrate
 ```
 
-4. Crea un superusuario para acceder al panel de administración (sigue las instrucciones en la consola):
-
-```bash
-python manage.py createsuperuser
-```
-
-5. Ejecuta el servidor de desarrollo:
+4. Ejecuta el servidor de desarrollo:
 
 ```bash
 python manage.py runserver
@@ -57,44 +42,15 @@ python manage.py runserver
 
 6. Abre tu navegador y accede a [http://localhost:8000/](http://localhost:8000/) para ver la aplicación en funcionamiento.
 
+---
 
-7.
-
-- admin -> 12345
-- cliente -> 12345
-
-
-
-
-
-
---- 
-
-
-### pip install 
-```bash
-Django==4.2.3
-
-cx-Oracle==8.3.0
-
-django-cors-headers==4.2.0
-
-djangorestframework==3.14.0
-
-oracledb==1.3.2
-
-Pillow==10.0.0
-
-requests==2.31.0
-
-Unidecode==1.3.7
-```
-
+Ahora puedes utilizar nuestro proyecto en nuestro primer Sprint, para que podamos utilizar 
 ===================================================================================
 
- Participantes de Ctrl + Queens 
+Participantes de Ctrl + QUEENS 👸
 
-    - Valentina Guajuardo
-    - Antonia Galaz
-    - Paz Tobar
-    - Giovanna Espinosa
+    - Valentina Guajuardo  👩‍💻
+    - Antonia Galaz  👩‍💻
+    - Paz Tobar  👩‍💻
+    - Giovanna Espinosa  👩‍💻
+ 
