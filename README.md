@@ -1,6 +1,9 @@
-#                       HACKATHON  FEM TECH MACH BCI 2024
+# HACKATHON  FEM TECH MACH BCI 2024
+
 ---
- ##                 			      Ctrl + QUEENS
+
+## Ctrl + QUEENS
+
 ---
 
 Este repositorio es parte de  los desafios presentados en la Hackathon FEM TECH, 
