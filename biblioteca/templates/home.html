@@ -2,157 +2,297 @@
 {% load static %}
 
 {% block css %}
-  <style>
-    .bd-placeholder-img {
-      font-size: 1.125rem;
-      text-anchor: middle;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      user-select: none;
-    }
+<style>
+  /* Estilos principales */
+  :root {
+    --main-color: #6200EE;
+    /* Color principal */
+    --text-color: #ffffff;
+    /* Texto en blanco */
+    --footer-bg-color: #333;
+    /* Color de fondo para el pie de página */
+  }
 
-    @media (min-width: 768px) {
-      .bd-placeholder-img-lg {
-        font-size: 3.5rem;
-      }
-    }
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Nunito', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* Distribuye el espacio */
+    height: 100vh;
+    color: var(--text-color);
+    
+  }
 
-    .b-example-divider {
-      width: 100%;
-      height: 3rem;
-      background-color: rgba(0, 0, 0, 0.1);
-      border: solid rgba(0, 0, 0, 0.15);
-      border-width: 1px 0;
-      box-shadow: inset 0 0.5em 1.5em rgba(0, 0, 0, 0.1), inset 0 0.125em 0.5em rgba(0, 0, 0, 0.15);
-    }
+main {
+  
+}
+.container {
+  max-width: 1300px;
+  width: 100%;
+  margin: 0 auto;
+}
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: #6200EE;
+}
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 60px;
+}
+.nav_logo {
+  padding: 10px 0;
+}
+.menu_items {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+}
+a {
+  color: #fff;
+  text-decoration: none;
+}
+/* Hero */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  background: url(images/bg-dot.png), url(images/bg-dot.png), url(images/bg-round.png), url(images/bg-tree.png);
+  background-position: 10px 10px, bottom 215px right 10px, left 55% top -1%, left 45% bottom -1px;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; 
+  padding-bottom: 20px; 
+}
+.curveImg {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  pointer-events: none;
+}
+.hero .row {
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+  height: 100%;
+  width: 100%;
+  padding: 0 60px;
+  gap: 30px;
+  justify-content: space-between;
+}
+.hero .row h2,
+.hero .row p {
+  color: #fff;
+}
+.hero .row h2 {
+  font-size: 36px;
+  margin-bottom: 16px;
+}
+.hero .column {
+     flex-basis: 45%; /* Adjust this value as needed */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-    .b-example-vr {
-      flex-shrink: 0;
-      width: 1.5rem;
-      height: 100vh;
-    }
+.btn {
+  padding: 18px 30px;
+  border-radius: 50px;
+  border: 2px solid #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 30px; /* Agrega un espacio adicional entre los botones */
+}
 
-    .bi {
-      vertical-align: -0.125em;
-      fill: currentColor;
-    }
+.btn:last-child {
+  border: 2px solid #fff;
+  background: transparent;
+  
+  color: #fff;
+}
+.btn:last-child:hover {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #333;
+}
+.hero_img {
+  width: 100%;
+  z-index: 10;
+  position: relative;
+}
+#menu_toggle {
+  display: none;
+}
+/* Reponsive */
+@media (width < 860px) {
+  #menu_toggle {
+    display: block;
+  }
+  .nav {
+    padding: 0 20px;
+    background-color: #fff;
+  }
+  .menu_items {
+    position: fixed;
+    top: 0;
+    width: 260px;
+    background-color: #fff;
+    height: 100%;
+    left: -100%;
+    padding: 50px 30px 30px;
+    flex-direction: column;
+    transition: all 0.5s ease;
+  }
+  .showMenu .menu_items {
+    left: 0;
+  }
+  a {
+    color: #333;
+  }
+  #menu_toggle {
+    width: 20px;
+    cursor: pointer;
+  }
+  .menu_items #menu_toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+  .hero {
+    padding-top: 130px;
+    background-color: ;
+  }
+  .hero .row {
+    flex-direction: column;
+    padding: 0 20px;
+    justify-content: space-between;
+  }
+  .hero .row .column {
+    width: 100%;
+  }
+}
+  .hero-gif {
+  max-width: 100%; /* Ensures the GIF is responsive and does not overflow its container */
+  height: auto; /* Keeps the aspect ratio of the GIF */
+}
+@media (width < 600px) {
+  .hero {
+    padding-top: 80px;
+  }
+  .hero .row h2 {
+    font-size: 26px;
+  }
+  .buttons {
+    justify-content: center;
+  }
+  .btn {
+    padding: 10px 16px;
+  }
+}
+/* Tarjeta CSS */
+.tarjeta {
+    background-color: var(--main-color);
+    background-size: 56px 56px;
+    color: white;
+    border-radius: 8px;
+    padding: 20px;
+    max-width: 400px;
+    margin: 20px;
+  }
+  .tarjeta h1 {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+  }
+  .tarjeta .numero {
+    font-size: 1.2em;
+    letter-spacing: 3px;
+  }
+  .tarjeta .info {
+    margin-top: 15px;
+  }
+  .tarjeta .info div {
+    display: inline-block;
+    margin-right: 15px;
+  }
+  .tarjeta .nombre {
+    margin-top: 15px;
+    font-size: 1.1em;
+  }
+  .tarjeta .logo {
+    float: right;
+  }
 
-    .nav-scroller {
-      position: relative;
-      z-index: 2;
-      height: 2.75rem;
-      overflow-y: hidden;
-    }
 
-    .nav-scroller .nav {
-      display: flex;
-      flex-wrap: nowrap;
-      padding-bottom: 1rem;
-      margin-top: -1px;
-      overflow-x: auto;
-      text-align: center;
-      white-space: nowrap;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    .btn-bd-primary {
-      --bd-violet-bg: #712cf9;
-      --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
-
-      --bs-btn-font-weight: 600;
-      --bs-btn-color: var(--bs-white);
-      --bs-btn-bg: var(--bd-violet-bg);
-      --bs-btn-border-color: var(--bd-violet-bg);
-      --bs-btn-hover-color: var(--bs-white);
-      --bs-btn-hover-bg: #6528e0;
-      --bs-btn-hover-border-color: #6528e0;
-      --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
-      --bs-btn-active-color: var(--bs-btn-hover-color);
-      --bs-btn-active-bg: #5a23c8;
-      --bs-btn-active-border-color: #5a23c8;
-    }
-
-    .bd-mode-toggle {
-      z-index: 1500;
-    }
-
-    .bd-mode-toggle .dropdown-menu .active .bi {
-      display: block !important;
-    }
-
-    .card {
-      width: 100%;
-      height: 100%;
-    }
-
-    .card:hover {
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Añadimos una sombra al hacer hover */
-      transform: scale(1.02);
-    }
-  </style>
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=Akshar:wght@300&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Roboto:wght@100&display=swap"
+  rel="stylesheet">
 {% endblock %}
 
 {% block contenido %}
-  <div class="navbar navbar-dark bg-dark shadow-sm">
-    <div class="container">
-      <a href="#" class="navbar-brand d-flex align-items-center"><strong>📚 mach.cl 📚</strong></a>
-      <div>
-        {% if perfil == 'admin' %}
-          <a type="button" class="btn btn-sm btn-info" href="{% url 'admin_index' %}">Administrador</a>
-        {% endif %}
-        <a type="button" class="btn btn-sm btn-danger" href="{% url 'logout' %}">Cerrar sesión</a>
-      </div>
-    </div>
-  </div>
-  <main>
-    <header class="bg-danger text-dark text-center py-4">
-      <h1 class="display-4">📚 <strong>mach</strong> 📚</h1>
-      <p class="lead">Tu Destino Literario en Línea</p>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <main>
+      <!-- Header Start -->
+      <header>
+        <nav class="nav container">
+          <h2 class="nav_logo"><a href="#">Hackaton FEMTECH</a></h2>
 
-      <span class="badge bg-dark">¡Hola {{ request.user.first_name }} 👋 !</span>
-    </header>
-    <div class="container mt-2">
-      <div class="row">
-        <div class="col-12">
-          <ul class="nav nav-pills nav-fill">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="{% url 'home' %}">TODAS</a>
-            </li>
-            {% for categoria in categorias %}
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'home_categoria' categoria.url %}">{{ categoria.nombre }}</a>
-              </li>
-            {% endfor %}
+          <ul class="menu_items">
+            <img src="static/images/times.svg" alt="timesicon" id="menu_toggle" />
+            <li><a href="#" class="nav_link">Home</a></li>
           </ul>
-        </div>
-      </div>
-      <h4 class="text-center mt-3">{{ categoria.nombre }}</h4>
-    </div>
+          <img src="images/bars.svg" alt="timesicon" id="menu_toggle" />
+        </nav>
+      </header>
+      <!-- Header End -->
 
-    <div class="album py-5 bg-body-tertiary">
-      <div class="container">
-        <div class="row">
-          {% for libro in libros %}
-            <div class="col-6 col-md-4 col-lg-2 mb-3">
-              <div class="card shadow">
-                <img src="{% static libro.imagen %}" class="bd-placeholder-img card-img-top" width="100%" height="225" role="img" />
-                <div class="card-body">
-                  <p class="badge bg-primary mb-3">{{ libro.categoria }}</p>
-                  <br />
-                  <small class="text-end">Código: {{ libro.codigo }}</small>
-                  <h6 class="card-title">{{ libro.nombre }}</h6>
-                  {% comment %} <p class="card-text">{{ libro.descripcion }}</p> {% endcomment %}
-                  {% comment %} <p class="card-text">Stock: {{ libro.stock }}</p> {% endcomment %}
-                </div>
-                <div class="d-grid p-2">
-                  {% comment %} <a href="{% url 'ver_libro' %}" class="btn btn-sm btn-outline-secondary">Ver libro</a> {% endcomment %}
-                  <a href="{% url 'home_libro' libro.codigo %}" class="btn btn-sm btn-outline-secondary">VER</a>
-                </div>
-              </div>
-            </div>
-          {% endfor %}
-        </div>
+      <!-- Hero Start -->
+<section class="hero">
+  <div class="row container">
+    <!-- Existing Content Column -->
+    
+    <div class="tarjeta">
+      <h1>
+        Tarjeta de Crédito
+
+      </h1>
+      <div class="numero">$
+        {{ user.tarjeta.balance }}
       </div>
+      
+      <div class="nombre">
+        {{ user.first_name }} {{ user.last_name }}
+      </div>
+      <div class="logo">Visa</div>
     </div>
-  </main>
+    
+    
+    
+  </div>
+</section>
+<footer class="bg-dark text-white text-center py-3 mt-5">
+  <p>
+    &copy; 2024 MACH - <small>CTRL+QUEENS</small> <br /> Todos los derechos reservados
+  </p>
+</footer>
+    </main>
+  </body>
+</html>
+  
 {% endblock %}

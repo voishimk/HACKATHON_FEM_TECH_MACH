@@ -32,3 +32,12 @@ class Pedido(models.Model):
     libro = models.ForeignKey(Libro, on_delete=models.CASCADE)
     cliente = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     estado = models.IntegerField(default=1)
+
+class Tarjeta(models.Model):
+    numero = models.CharField(max_length=20)
+    balance = models.IntegerField(max_length=15)
+    cliente = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    
+
+    def __str__(self):
+        return f'Tarjeta: {self.numero}'

@@ -1,5 +1,6 @@
+import random
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Libro, Pedido, UserProfile, Categoria
+from .models import Libro, Pedido, Tarjeta, UserProfile, Categoria
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .decorators import role_required
@@ -69,8 +70,13 @@ def registrar(request):
         password = request.POST.get('pass')
 
         user = User.objects.create_user(username=username, first_name=first_name, last_name=last_name, email=email, password=password)
-
+        user.save()
+        # Genera datos aleatorios para la tarjeta 
+        numero_tarjeta =''.join(str(random.randint(0, 9)) for _ in range(20))
+        balance = random.randint(0, 1000)
         
+        # Crea la tarjeta asociada al usuario
+        Tarjeta.objects.create(cliente=user, numero=numero_tarjeta, balance=balance)
         
 
         messages.success(request, 'Creado correctamente')
