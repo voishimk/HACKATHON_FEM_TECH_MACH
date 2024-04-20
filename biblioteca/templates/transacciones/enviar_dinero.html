@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Envío de Dinero</title>
+</head>
+<body>
+    <h1>Envío de Dinero</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="receptor_id">ID del Receptor:</label>
+        <input type="text" name="receptor_id" id="receptor_id">
+        <br>
+        <label for="monto">Monto a Transferir:</label>
+        <input type="number" name="monto" id="monto">
+        <br>
+        <button type="submit">Enviar Dinero</button>
+    </form>
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>

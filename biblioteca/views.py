@@ -1,11 +1,13 @@
 import random
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Libro, Pedido, Tarjeta, UserProfile, Categoria
+from .models import Tarjeta, UserProfile
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .decorators import role_required
 from django.contrib.auth.models import User
 from django.contrib import messages
+from .models import Tarjeta, UserProfile
+
 
 ## REQUESTS
 import requests
@@ -72,8 +74,8 @@ def registrar(request):
         user = User.objects.create_user(username=username, first_name=first_name, last_name=last_name, email=email, password=password)
         user.save()
         # Genera datos aleatorios para la tarjeta 
-        numero_tarjeta =''.join(str(random.randint(0, 9)) for _ in range(20))
-        balance = random.randint(0, 1000)
+        numero_tarjeta =''.join(str(random.randint(0, 9)) for _ in range(16))
+        balance = random.randint(0, 100000000)
         
         # Crea la tarjeta asociada al usuario
         Tarjeta.objects.create(cliente=user, numero=numero_tarjeta, balance=balance)
@@ -105,167 +107,81 @@ def recuperar(request):
 # SISTEMA
 @login_required
 def home(request):
-    perfil = request.session.get('perfil')
-    libros = Libro.objects.all()
-    categorias = Categoria.objects.all()
+    # perfil = request.session.get('perfil')
 
     context = {
-        'perfil' : perfil,
-        'libros' : libros,
-        'categorias': categorias,
-        'categoria': None
+        'perfil' : "perfil",
     }
 
     return render(request, 'home.html', context)
 
-def home_categoria(request, url):
-    perfil = request.session.get('perfil')
-    categorias = Categoria.objects.all()
 
-    categoria = Categoria.objects.get(url=url)
-    libros = categoria.libro_set.all()
+def enviar_dinero(request):
+    if request.method == 'POST':
+        # Obtener los datos del formulario
+        receptor_id = request.POST.get('receptor_id')
+        monto = int(request.POST.get('monto'))
 
-    context = {
-        'perfil' : perfil,
-        'libros' : libros,
-        'categorias': categorias,
-        'categoria': categoria
-    }
+        # Obtener el usuario actual y su tarjeta
+        usuario = request.user
+        tarjeta_usuario = Tarjeta.objects.get(cliente=usuario)
 
-    return render(request, 'home.html', context)
+        # Verificar si el usuario tiene saldo suficiente
+        if tarjeta_usuario.balance < monto:
+            messages.error(request, 'No tienes suficiente saldo para realizar esta transferencia.')
+            return redirect('enviar_dinero')
 
-def home_libro(request, codigo):
-    perfil = request.session.get('perfil')
-    libro = Libro.objects.get(codigo=codigo)
+        # Verificar si el receptor existe
+        try:
+            receptor = UserProfile.objects.get(id=receptor_id).user
+        except UserProfile.DoesNotExist:
+            messages.error(request, 'El receptor no existe.')
+            return redirect('enviar_dinero')
 
-    context = {
-        'perfil' : perfil,
-        'libro' : libro,
-    }
+        # Realizar la transferencia
+        tarjeta_receptor = Tarjeta.objects.get(cliente=receptor)
+        tarjeta_usuario.balance -= monto
+        tarjeta_receptor.balance += monto
+        tarjeta_usuario.save()
+        tarjeta_receptor.save()
 
-    return render(request, 'libro.html', context)
+        messages.success(request, f'Se han transferido ${monto} a {receptor.username} correctamente.')
+        return redirect('enviar_dinero')
 
-
+    return render(request, 'enviar_dinero.html')
 
 # USUARIO
 
-# LIBRO
-def lista_libro(request):
-    if request.method == 'GET':
-        libros = Libro.objects.all() # select * from libro
-        serializer = LibroSerializer(libros, many=True)
+# def enviar_dinero(request):
+#     if request.method == 'POST':
+#         # Obtener los datos del formulario
+#         receptor_id = request.POST.get('receptor_id')
+#         monto = int(request.POST.get('monto'))
 
-        for libro_data in serializer.data:
-          libro_data['imagen'] = settings.BASE_URL + '/static' + libro_data['imagen']
+#         # Obtener el usuario actual y su tarjeta
+#         usuario = request.user
+#         tarjeta_usuario = Tarjeta.objects.get(cliente=usuario)
 
-        return Response(serializer.data)
+#         # Verificar si el usuario tiene saldo suficiente
+#         if tarjeta_usuario.balance < monto:
+#             messages.error(request, 'No tienes suficiente saldo para realizar esta transferencia.')
+#             return redirect('enviar_dinero')
 
-    elif request.method == 'POST':
-        data = JSONParser().parse(request)
-        serializer = LibroSerializer(data=data)
+#         # Verificar si el receptor existe
+#         try:
+#             receptor = UserProfile.objects.get(id=receptor_id).user
+#         except UserProfile.DoesNotExist:
+#             messages.error(request, 'El receptor no existe.')
+#             return redirect('enviar_dinero')
 
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        else:
-            print('error', serializer.errors)
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#         # Realizar la transferencia
+#         tarjeta_receptor = Tarjeta.objects.get(cliente=receptor)
+#         tarjeta_usuario.balance -= monto
+#         tarjeta_receptor.balance += monto
+#         tarjeta_usuario.save()
+#         tarjeta_receptor.save()
 
-def vista_libro(request, id):
-    libro = Libro.objects.get_object_or_404(id=id)
+#         messages.success(request, f'Se han transferido ${monto} a {receptor.username} correctamente.')
+#         return redirect('enviar_dinero')
 
-        # return Response(status=status.HTTP_404_NOT_FOUND)
-
-    if request.method == 'GET':
-      context = {
-        'libro' : libro
-      }
-      return render(request, 'biblioteca/libro/show.html', context)
-
-    elif request.method == 'PUT' or request.method == 'PATCH':
-        data = JSONParser().parse(request)
-        serializer = LibroSerializer(libro, data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        else:
-            print('error', serializer.errors)
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    elif request.method == 'DELETE':
-        libro.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
-
-
-
-
-def lista_libros(request):
-    libros = Libro.objects.all()
-
-
-
-def detalle_libro(request, libro_id):
-    libro = get_object_or_404(Libro, pk=libro_id)
-
-    context = {
-        'libro' : libro
-    }
-
-    return render(request, 'biblioteca/detalle_libro.html', context)
-
-def solicitar_libro(request, libro_id):
-    libro = get_object_or_404(Libro, pk=libro_id)
-    # Aquí puedes manejar la lógica de solicitud de libros
-    return redirect('lista_libros')
-
-# GET - POST /libro/
-def lista_libro(request):
-    if request.method == 'GET':
-        libros = Libro.objects.all() # select * from libro
-        context = {
-            'libros' : libros
-        }
-
-        return render(request, 'libro.index', context)
-
-    # elif request.method == 'POST':
-    #     data = JSONParser().parse(request)
-    #     serializer = LibroSerializer(data=data)
-
-    #     if serializer.is_valid():
-    #         serializer.save()
-    #         return Response(serializer.data, status=status.HTTP_201_CREATED)
-    #     else:
-    #         print('error', serializer.errors)
-    #         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-def lista_categoria(request):
-    if request.method == 'GET':
-        categorias = Categoria.objects.all() # select * from libro
-        context = {
-            'categorias' : categorias
-        }
-
-        return render(request, 'categoria.index', context)
-
-def vista_api(request):
-    api_url = "https://rickandmortyapi.com/api/character/1"
-
-    try:
-        # Realizar una solicitud GET a la API principal
-        response = requests.get(api_url)
-
-        # Verificar si la solicitud fue exitosa
-        if response.status_code == 200:
-            rick_data = response.json()
-            context = {
-                'rick' : rick_data
-            }
-            return render(request, 'api/rick.html', context)
-
-        # Si la solicitud a la API principal falló
-        else:
-            return JsonResponse({"error": "Error al obtener los datos de la API principal"}, status=response.status_code)
-
-    except Exception as e:
-        return JsonResponse({"error": str(e)}, status=500)
+#     return render(request, 'enviar_dinero.html')

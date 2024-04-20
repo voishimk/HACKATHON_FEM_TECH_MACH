@@ -102,13 +102,14 @@
 
                         <div class="mb-2">
                             <label for="correo" class="form-label">Correo</label>
-                            <input type="text" class="form-control" name="correo" id="correo" required>
+                            <input type="text" class="form-control" name="correo" id="correo" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" 
+                   title="Por favor ingresa un correo electrónico válido" required>
                             <small class="text-danger" id="correo-error"></small>
                         </div>
 
                         <div class="mb-2">
                             <label for="pass" class="form-label">Contraseña</label>
-                            <input type="password" class="form-control" name="pass" id="pass" required>
+                            <input type="password" class="form-control" name="pass" id="pass" pattern=".{8,}" title="La contraseña debe tener al menos 8 caracteres" required>
                             <small class="text-danger" id="pass-error"></small>
                         </div>
 

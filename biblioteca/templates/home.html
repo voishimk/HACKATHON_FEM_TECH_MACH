@@ -23,183 +23,216 @@
     /* Distribuye el espacio */
     height: 100vh;
     color: var(--text-color);
-    
+
   }
 
-main {
-  
-}
-.container {
-  max-width: 1300px;
-  width: 100%;
-  margin: 0 auto;
-}
-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
-  background-color: #6200EE;
-}
-.nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 60px;
-}
-.nav_logo {
-  padding: 10px 0;
-}
-.menu_items {
-  display: flex;
-  list-style: none;
-  gap: 20px;
-}
-a {
-  color: #fff;
-  text-decoration: none;
-}
-/* Hero */
-.hero {
-  position: relative;
-  min-height: 100vh;
-  width: 100%;
-  background: url(images/bg-dot.png), url(images/bg-dot.png), url(images/bg-round.png), url(images/bg-tree.png);
-  background-position: 10px 10px, bottom 215px right 10px, left 55% top -1%, left 45% bottom -1px;
-  background-repeat: no-repeat;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between; 
-  padding-bottom: 20px; 
-}
-.curveImg {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  pointer-events: none;
-}
-.hero .row {
-  display: flex;
-  align-items: center;
-  min-height: 100vh;
-  height: 100%;
-  width: 100%;
-  padding: 0 60px;
-  gap: 30px;
-  justify-content: space-between;
-}
-.hero .row h2,
-.hero .row p {
-  color: #fff;
-}
-.hero .row h2 {
-  font-size: 36px;
-  margin-bottom: 16px;
-}
-.hero .column {
-     flex-basis: 45%; /* Adjust this value as needed */
+  main {}
+
+  .container {
+    max-width: 1300px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: #6200EE;
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 60px;
+  }
+
+  .nav_logo {
+    padding: 10px 0;
+  }
+
+  .menu_items {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+  }
+
+  a {
+    color: #fff;
+    text-decoration: none;
+  }
+
+  /* Hero */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    background: url(images/bg-dot.png), url(images/bg-dot.png), url(images/bg-round.png), url(images/bg-tree.png);
+    background-position: 10px 10px, bottom 215px right 10px, left 55% top -1%, left 45% bottom -1px;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 20px;
+  }
+
+  .curveImg {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    pointer-events: none;
+  }
+
+  .hero .row {
+    display: flex;
+    align-items: center;
+    min-height: 100vh;
+    height: 100%;
+    width: 100%;
+    padding: 0 60px;
+    gap: 30px;
+    justify-content: space-between;
+  }
+
+  .hero .row h2,
+  .hero .row p {
+    color: #fff;
+  }
+
+  .hero .row h2 {
+    font-size: 36px;
+    margin-bottom: 16px;
+  }
+
+  .hero .column {
+    flex-basis: 45%;
+    /* Adjust this value as needed */
     display: flex;
     justify-content: center;
     align-items: center;
-}
+  }
 
-.btn {
-  padding: 18px 30px;
-  border-radius: 50px;
-  border: 2px solid #fff;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  margin-bottom: 30px; /* Agrega un espacio adicional entre los botones */
-}
+  .btn {
+    padding: 18px 30px;
+    border-radius: 50px;
+    border: 2px solid #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 30px;
+    /* Agrega un espacio adicional entre los botones */
+  }
 
-.btn:last-child {
-  border: 2px solid #fff;
-  background: transparent;
-  
-  color: #fff;
-}
-.btn:last-child:hover {
-  cursor: pointer;
-  transition: all 0.3s ease;
-  color: #333;
-}
-.hero_img {
-  width: 100%;
-  z-index: 10;
-  position: relative;
-}
-#menu_toggle {
-  display: none;
-}
-/* Reponsive */
-@media (width < 860px) {
-  #menu_toggle {
-    display: block;
+  .btn:last-child {
+    border: 2px solid #fff;
+    background: transparent;
+
+    color: #fff;
   }
-  .nav {
-    padding: 0 20px;
-    background-color: #fff;
-  }
-  .menu_items {
-    position: fixed;
-    top: 0;
-    width: 260px;
-    background-color: #fff;
-    height: 100%;
-    left: -100%;
-    padding: 50px 30px 30px;
-    flex-direction: column;
-    transition: all 0.5s ease;
-  }
-  .showMenu .menu_items {
-    left: 0;
-  }
-  a {
+
+  .btn:last-child:hover {
+    cursor: pointer;
+    transition: all 0.3s ease;
     color: #333;
   }
-  #menu_toggle {
-    width: 20px;
-    cursor: pointer;
-  }
-  .menu_items #menu_toggle {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-  }
-  .hero {
-    padding-top: 130px;
-    background-color: ;
-  }
-  .hero .row {
-    flex-direction: column;
-    padding: 0 20px;
-    justify-content: space-between;
-  }
-  .hero .row .column {
+
+  .hero_img {
     width: 100%;
+    z-index: 10;
+    position: relative;
   }
-}
+
+  #menu_toggle {
+    display: none;
+  }
+
+  /* Reponsive */
+  @media (width < 860px) {
+    #menu_toggle {
+      display: block;
+    }
+
+    .nav {
+      padding: 0 20px;
+      background-color: #fff;
+    }
+
+    .menu_items {
+      position: fixed;
+      top: 0;
+      width: 260px;
+      background-color: #fff;
+      height: 100%;
+      left: -100%;
+      padding: 50px 30px 30px;
+      flex-direction: column;
+      transition: all 0.5s ease;
+    }
+
+    .showMenu .menu_items {
+      left: 0;
+    }
+
+    a {
+      color: #333;
+    }
+
+    #menu_toggle {
+      width: 20px;
+      cursor: pointer;
+    }
+
+    .menu_items #menu_toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+
+    .hero {
+      padding-top: 130px;
+      background-color: ;
+    }
+
+    .hero .row {
+      flex-direction: column;
+      padding: 0 20px;
+      justify-content: space-between;
+    }
+
+    .hero .row .column {
+      width: 100%;
+    }
+  }
+
   .hero-gif {
-  max-width: 100%; /* Ensures the GIF is responsive and does not overflow its container */
-  height: auto; /* Keeps the aspect ratio of the GIF */
-}
-@media (width < 600px) {
-  .hero {
-    padding-top: 80px;
+    max-width: 100%;
+    /* Ensures the GIF is responsive and does not overflow its container */
+    height: auto;
+    /* Keeps the aspect ratio of the GIF */
   }
-  .hero .row h2 {
-    font-size: 26px;
+
+  @media (width < 600px) {
+    .hero {
+      padding-top: 80px;
+    }
+
+    .hero .row h2 {
+      font-size: 26px;
+    }
+
+    .buttons {
+      justify-content: center;
+    }
+
+    .btn {
+      padding: 10px 16px;
+    }
   }
-  .buttons {
-    justify-content: center;
-  }
-  .btn {
-    padding: 10px 16px;
-  }
-}
-/* Tarjeta CSS */
-.tarjeta {
+
+  /* Tarjeta CSS */
+  .tarjeta {
     background-color: var(--main-color);
     background-size: 56px 56px;
     color: white;
@@ -208,30 +241,34 @@ a {
     max-width: 400px;
     margin: 20px;
   }
+
   .tarjeta h1 {
     font-size: 1.5em;
     margin-bottom: 15px;
   }
+
   .tarjeta .numero {
     font-size: 1.2em;
     letter-spacing: 3px;
   }
+
   .tarjeta .info {
     margin-top: 15px;
   }
+
   .tarjeta .info div {
     display: inline-block;
     margin-right: 15px;
   }
+
   .tarjeta .nombre {
     margin-top: 15px;
     font-size: 1.1em;
   }
+
   .tarjeta .logo {
     float: right;
   }
-
-
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -243,56 +280,62 @@ a {
 {% block contenido %}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  </head>
-  <body>
-    <main>
-      <!-- Header Start -->
-      <header>
-        <nav class="nav container">
-          <h2 class="nav_logo"><a href="#">Hackaton FEMTECH</a></h2>
 
-          <ul class="menu_items">
-            <img src="static/images/times.svg" alt="timesicon" id="menu_toggle" />
-            <li><a href="#" class="nav_link">Home</a></li>
-          </ul>
-          <img src="images/bars.svg" alt="timesicon" id="menu_toggle" />
-        </nav>
-      </header>
-      <!-- Header End -->
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
 
-      <!-- Hero Start -->
-<section class="hero">
-  <div class="row container">
-    <!-- Existing Content Column -->
-    
-    <div class="tarjeta">
-      <h1>
-        Tarjeta de Crédito
+<body>
+  <main>
+    <!-- Header Start -->
+    <header>
+      <nav class="nav container">
+        <h2 class="nav_logo"><a href="#">Hackaton FEMTECH</a></h2>
 
-      </h1>
-      <div class="numero">$
-        {{ user.tarjeta.balance }}
+        <ul class="menu_items">
+          <img src="static/images/times.svg" alt="timesicon" id="menu_toggle" />
+          <li><a href="#" class="nav_link">Home</a></li>
+        </ul>
+        <img src="images/bars.svg" alt="timesicon" id="menu_toggle" />
+      </nav>
+    </header>
+    <!-- Header End -->
+
+    <!-- Hero Start -->
+    <section class="hero">
+      <div class="row container">
+        <!-- Existing Content Column -->
+
+        <div class="tarjeta">
+          {% for tarjeta in user.tarjeta_set.all %}
+          <h1>
+            Tarjeta Digital
+            {{ tarjeta.numero }}
+          </h1>
+          <div class="info">
+            <div>Balance:</div>
+            <div>${{ tarjeta.balance }}</div>
+          </div>
+          {% endfor %}
+
+          <div class="nombre">
+            {{ user.first_name }} {{ user.last_name }}
+          </div>
+          <div class="logo">Visa</div>
+        </div>
+        
+
+
       </div>
-      
-      <div class="nombre">
-        {{ user.first_name }} {{ user.last_name }}
-      </div>
-      <div class="logo">Visa</div>
-    </div>
-    
-    
-    
-  </div>
-</section>
-<footer class="bg-dark text-white text-center py-3 mt-5">
-  <p>
-    &copy; 2024 MACH - <small>CTRL+QUEENS</small> <br /> Todos los derechos reservados
-  </p>
-</footer>
-    </main>
-  </body>
+    </section>
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+      <p>
+        &copy; 2024 MACH - <small>CTRL+QUEENS</small> <br /> Todos los derechos reservados
+      </p>
+    </footer>
+  </main>
+</body>
+
 </html>
-  
+
 {% endblock %}
