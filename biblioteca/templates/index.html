@@ -1,0 +1,259 @@
+{% extends 'layouts/normal/base.html' %}
+{% load static %}
+
+{% block css %}
+<style>
+  /* Estilos principales */
+  :root {
+    --main-color: #6200EE;
+    /* Color principal */
+    --text-color: #ffffff;
+    /* Texto en blanco */
+    --footer-bg-color: #333;
+    /* Color de fondo para el pie de página */
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Nunito', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* Distribuye el espacio */
+    height: 100vh;
+    color: var(--text-color);
+    
+  }
+
+main {
+  background: #6610f2;
+}
+.container {
+  max-width: 1300px;
+  width: 100%;
+  margin: 0 auto;
+}
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 60px;
+}
+.nav_logo {
+  padding: 10px 0;
+}
+.menu_items {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+}
+a {
+  color: #fff;
+  text-decoration: none;
+}
+/* Hero */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  background: url(images/bg-dot.png), url(images/bg-dot.png), url(images/bg-round.png), url(images/bg-tree.png);
+  background-position: 10px 10px, bottom 215px right 10px, left 55% top -1%, left 45% bottom -1px;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; 
+  padding-bottom: 20px; 
+}
+.curveImg {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  pointer-events: none;
+}
+.hero .row {
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+  height: 100%;
+  width: 100%;
+  padding: 0 60px;
+  gap: 30px;
+  justify-content: space-between;
+}
+.hero .row h2,
+.hero .row p {
+  color: #fff;
+}
+.hero .row h2 {
+  font-size: 36px;
+  margin-bottom: 16px;
+}
+.hero .column {
+     flex-basis: 45%; /* Adjust this value as needed */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn {
+  padding: 18px 30px;
+  border-radius: 50px;
+  border: 2px solid #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 30px; /* Agrega un espacio adicional entre los botones */
+}
+
+.btn:last-child {
+  border: 2px solid #fff;
+  background: transparent;
+  
+  color: #fff;
+}
+.btn:last-child:hover {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #333;
+}
+.hero_img {
+  width: 100%;
+  z-index: 10;
+  position: relative;
+}
+#menu_toggle {
+  display: none;
+}
+/* Reponsive */
+@media (width < 860px) {
+  #menu_toggle {
+    display: block;
+  }
+  .nav {
+    padding: 0 20px;
+    background-color: #fff;
+  }
+  .menu_items {
+    position: fixed;
+    top: 0;
+    width: 260px;
+    background-color: #fff;
+    height: 100%;
+    left: -100%;
+    padding: 50px 30px 30px;
+    flex-direction: column;
+    transition: all 0.5s ease;
+  }
+  .showMenu .menu_items {
+    left: 0;
+  }
+  a {
+    color: #333;
+  }
+  #menu_toggle {
+    width: 20px;
+    cursor: pointer;
+  }
+  .menu_items #menu_toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+  .hero {
+    padding-top: 130px;
+  }
+  .hero .row {
+    flex-direction: column;
+    padding: 0 20px;
+    justify-content: space-between;
+  }
+  .hero .row .column {
+    width: 100%;
+  }
+}
+  .hero-gif {
+  max-width: 100%; /* Ensures the GIF is responsive and does not overflow its container */
+  height: auto; /* Keeps the aspect ratio of the GIF */
+}
+@media (width < 600px) {
+  .hero {
+    padding-top: 80px;
+  }
+  .hero .row h2 {
+    font-size: 26px;
+  }
+  .buttons {
+    justify-content: center;
+  }
+  .btn {
+    padding: 10px 16px;
+  }
+}
+
+
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=Akshar:wght@300&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Roboto:wght@100&display=swap"
+  rel="stylesheet">
+{% endblock %}
+
+{% block contenido %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <main>
+      <!-- Header Start -->
+      <header>
+        <nav class="nav container">
+          <h2 class="nav_logo"><a href="#">Hackaton FEMTECH</a></h2>
+
+          <ul class="menu_items">
+            <img src="static/images/times.svg" alt="timesicon" id="menu_toggle" />
+            <li><a href="#" class="nav_link">Home</a></li>
+          </ul>
+          <img src="images/bars.svg" alt="timesicon" id="menu_toggle" />
+        </nav>
+      </header>
+      <!-- Header End -->
+
+      <!-- Hero Start -->
+<section class="hero">
+  <div class="row container">
+    <!-- Existing Content Column -->
+    <div class="column">
+      <h2>Bienvenidos a nuestra solución <br /> del desafío </h2>
+      <div class="buttons">
+        <button class="btn"><a href="{% url 'registrar' %}" class="login-button">Registrate</a></button>
+        <button class="btn"><a href="{% url 'login' %}" class="login-button">Iniciar sesión</a></button>
+      </div>
+    </div>
+    <!-- New GIF Column -->
+    <div class="column">
+      <img
+        src="https://assets-global.website-files.com/5ed69cbee53b0a8b762ce25b/650b3f01e4ce1191488016d4_Comp%205_2_1.gif"
+        alt="Animated Decorative GIF" class="hero-gif">
+    </div>
+  </div>
+</section>
+<footer class="bg-dark text-white text-center py-3 mt-5">
+  <p>
+    &copy; 2024 MACH - <small>CTRL+QUEENS</small> <br /> Todos los derechos reservados
+  </p>
+</footer>
+    </main>
+  </body>
+</html>
+
+{% endblock %}

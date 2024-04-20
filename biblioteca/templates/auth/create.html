@@ -1,0 +1,129 @@
+{% extends 'layouts/normal/base.html' %}
+{% load static %}
+
+{% block css %}
+<style>
+    :root {
+    --main-color: #ffffff;
+    /* Color principal */
+    --text-color:#6200EE ;
+    /* Texto en blanco */
+    --footer-bg-color: #333;
+    /* Color de fondo para el pie de página */
+  }
+
+  body {
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+    font-family: 'Nunito', sans-serif;;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* Distribuye el espacio */
+    height: 100vh;
+    color: var(--text-color);
+  }
+
+    main {
+        background: #6610f2;
+    }
+
+    .btn {
+        padding: 14px 26px;
+        background: #ffffff;
+        color: var(--text-color);
+        border-radius: 50px;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    label, a{
+        color: var(--main-color);
+    }
+    p{
+        color: var(--main-color);
+    }
+
+    .btn:hover {
+        background-color: #6610f2;
+        color: #fff;
+        border: 2px solid #fff;
+
+    }
+    .card{
+        background-color: #6610f2;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=Akshar:wght@300&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Roboto:wght@100&display=swap"
+  rel="stylesheet">
+{% endblock %}
+
+{% block contenido %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-4 mt-5">
+            <div class="card p-5">
+                <div class="card-body">
+                    <img src="{% static 'img/logo-mach-blanco.png' %}" class="img-fluid mx-auto d-block" alt="Logo" width="60%" >
+
+                    <p class="fw-light text-center mt-3">
+                        Registro de usuarios <br> 
+                    </p>
+                    <form action="{% url 'registrar' %}" method="POST">
+                        {% csrf_token %}
+
+                        {% if error %}
+                        <small class="text-danger">{{ error }}</small>
+                        {% endif %}
+
+                        <div class="mb-2">
+                            <label for="nombre" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" name="nombre" id="nombre" required>
+                            <small class="text-danger" id="nombre-error"></small>
+                        </div>
+
+                        <div class="mb-2">
+                            <label for="apellido" class="form-label">Apellido</label>
+                            <input type="text" class="form-control" name="apellido" id="apellido" required>
+                            <small class="text-danger" id="apellido-error"></small>
+                        </div>
+
+                        <div class="mb-2">
+                            <label for="usuario" class="form-label">Rut (sin puntos ni guión)</label>
+                            <input type="text" class="form-control" name="username" id="usuario" required>
+                            <small class="text-danger" id="usuario-error"></small>
+                        </div>
+
+                        <div class="mb-2">
+                            <label for="correo" class="form-label">Correo</label>
+                            <input type="text" class="form-control" name="correo" id="correo" required>
+                            <small class="text-danger" id="correo-error"></small>
+                        </div>
+
+                        <div class="mb-2">
+                            <label for="pass" class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" name="pass" id="pass" required>
+                            <small class="text-danger" id="pass-error"></small>
+                        </div>
+
+
+
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-success mt-3"><strong>Guardar</strong></button>
+
+                            <a href="{% url 'login' %}" class="text-center mt-3">Volver</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
