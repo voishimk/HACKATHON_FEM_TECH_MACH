@@ -43,8 +43,6 @@ python manage.py runserver
 6. Abre tu navegador y accede a [http://localhost:8000/](http://localhost:8000/) para ver la aplicación en funcionamiento.
 
 ---
-
-Ahora puedes utilizar nuestro proyecto en nuestro primer Sprint, para que podamos utilizar 
 ===================================================================================
 
 Participantes de Ctrl + QUEENS 👸
