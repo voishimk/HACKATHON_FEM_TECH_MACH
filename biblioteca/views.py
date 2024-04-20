@@ -21,6 +21,27 @@ def inicio_sesion(request):
         clave = request.POST.get('pass')
         user = authenticate(request, username=usuario, password=clave)
         if user is not None:
+            try:
+                profile = UserProfile.objects.get(user=user)
+            except UserProfile.DoesNotExist:
+                # If UserProfile doesn't exist, create one
+                profile = UserProfile.objects.create(user=user, role='default')
+
+            request.session['perfil'] = profile.role
+            login(request, user)
+            return redirect('home')
+        else:
+            context = {
+                'error': 'Error intente nuevamente.'
+            }
+            return render(request, 'auth/index.html', context)
+
+    return render(request, 'auth/index.html')
+    if request.method == 'POST':
+        usuario = request.POST.get('usuario')
+        clave = request.POST.get('pass')
+        user = authenticate(request, username=usuario, password=clave)
+        if user is not None:
             profile = UserProfile.objects.get(user=user)
             request.session['perfil'] = profile.role
 
