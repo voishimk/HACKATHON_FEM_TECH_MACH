@@ -40,8 +40,9 @@
 
 
           </ul>
-          <form class="d-flex" role="search">
-            <a class="btn btn-light" type="submit">Salir</a>
+          <form class="d-flex" action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button class="btn btn-light" type="submit">Salir</button>
           </form>
         </div>
       </div>
@@ -70,7 +71,37 @@
             <a href="{% url 'historial' %}" class="list-group-item list-group-item-action">HISTORIAL</a>
           </div>
         </div>
-        <div class="col-md-6">
+        <div class="col">
+          <div class="card text-white bg-secondary">
+            <div class="card-body">
+              <h4 class="card-title">Historial</h4>
+              <ol class="list-group">
+              {% for transaccion in transacciones %}
+              <li class="list-group-item d-flex justify-content-between align-items-start">
+                  <div class="ms-2 me-auto">
+                      <div class="fw-bold">{{ transaccion.fecha|date:"d-m-Y" }}</div>
+                      CODIGO: {{ transaccion.id }}
+                      Desde: {{ transaccion.tarjeta_origen.cliente.username }}
+                      Hacia: {{ transaccion.tarjeta_destino.cliente.username }}
+
+                      <a href="{% url 'transferenciaCodigo' transaccion.id %}" class="btn btn-outline-primary btn-sm">
+                        VER DETALLE
+                      </a>
+                  </div>
+                  <span class="badge rounded-pill {% if transaccion.tarjeta_origen.cliente == request.user %}bg-danger{% else %}bg-success{% endif %}">
+                      {% if transaccion.tarjeta_origen.cliente == request.user %}
+                          -{{ transaccion.monto }}
+                      {% else %}
+                          +{{ transaccion.monto }}
+                      {% endif %}
+                  </span>
+              </li>
+              {% empty %}
+                  <li class="list-group-item">No se encontraron transacciones</li>
+              {% endfor %}
+              </ol>
+            </div>
+          </div>
 
         </div>
       </div>

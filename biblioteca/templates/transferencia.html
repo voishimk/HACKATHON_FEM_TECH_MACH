@@ -1,0 +1,150 @@
+{% extends 'layouts/normal/base.html' %}
+{% load static %}
+
+{% block css %}
+<style>
+ :root {
+  font-family: 'Nunito', sans-serif;
+ }
+  .bg-mach {
+    background: #6200EE;
+  }
+  body {
+    font-family: 'Nunito', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* Distribuye el espacio */
+    height: 100vh;
+    color: var(--text-color);
+  }
+  .text-mach {
+    color: #6200EE;
+  }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=Akshar:wght@300&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Roboto:wght@100&display=swap"
+  rel="stylesheet">
+{% endblock %}
+
+{% block contenido %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+  <main>
+    <nav class="navbar navbar-expand-lg bg-mach text-white">
+      <div class="container-fluid">
+        <a class="navbar-brand text-white" href="#"><strong>Hackaton FEMTECH</strong></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarScroll">
+          <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+
+
+          </ul>
+          <form class="d-flex" action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button class="btn btn-light" type="submit">Salir</button>
+          </form>
+          
+        </div>
+      </div>
+    </nav>
+
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="mb-3">
+            <div class="card text-start text-white bg-mach">
+              <div class="card-body">
+                <h4 class="card-title">Mi cuenta: {{ user.username }}</h4>
+                <h4 class="card-title">{{ tarjeta.numero }}</h4>
+                <p class="card-text">
+                  <div class="row">
+                    <div>Balance:</div>
+                    <div>${{ tarjeta.balance }}</div>
+                  </div>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="list-group">
+            <a href="{% url 'home' %}" class="list-group-item list-group-item-action">MI CUENTA</a>
+            <a href="{% url 'transferencia' %}" class="list-group-item list-group-item-action">DEPOSITAR</a>
+            <a href="{% url 'historial' %}" class="list-group-item list-group-item-action">HISTORIAL</a>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card bg-mach text-white">
+            <div class="card-body">
+                <img src="{% static 'img/logo-mach-blanco.png' %}" class="img-fluid mx-auto d-block" alt="Logo" width="60%" >
+
+                <p class="text-center mt-3">
+                  TRANSFERIR
+                  <br>
+                </p>
+                <form action="{% url 'transferencia' %}" method="POST">
+                    {% csrf_token %}
+
+                    {% if messages %}
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      <ul class="messages">
+                          {% for message in messages %}
+                          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                          {% endfor %}
+                      </ul>
+                    </div>
+                    {% endif %}
+
+                    <div class="mb-2">
+                        <label for="username" class="form-label">Rut (sin puntos ni guión)</label>
+                        <input type="text" class="form-control" name="username" id="username" required>
+                        <small class="text-danger" id="username-error"></small>
+                    </div>
+
+                    <div class="mb-2">
+                        <label for="monto" class="form-label">Monto</label>
+                        <input type="number" min="1" max="" class="form-control" name="monto" id="monto" required>
+                        <small class="text-danger" id="monto-error"></small>
+                    </div>
+
+                    <div class="mb-2">
+                        <label for="pass" class="form-label">Contraseña</label>
+                        <input type="password" class="form-control" name="pass" required>
+                        <small class="text-danger" id="pass-error"></small>
+                    </div>
+                    <div class="d-grid">
+                      <button type="submit" class="btn btn-light text-mach mt-3"><strong>Depositar</strong></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        </div>
+      </div>
+    </div>
+    {% comment %} </section> {% endcomment %}
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+      <p>
+        &copy; 2024 MACH - <small>CTRL+QUEENS</small> <br /> Todos los derechos reservados
+      </p>
+    </footer>
+  </main>
+</body>
+
+</html>
+<script>
+  var alertList = document.querySelectorAll(".alert");
+  alertList.forEach(function (alert) {
+    new bootstrap.Alert(alert);
+  });
+</script>
+{% endblock %}

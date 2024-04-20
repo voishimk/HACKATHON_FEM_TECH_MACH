@@ -58,13 +58,14 @@ header {
 a {
   color: #fff;
   text-decoration: none;
+  font-weight: 600;
 }
 /* Hero */
 .hero {
   position: relative;
   min-height: 100vh;
   width: 100%;
-  background: url(images/bg-dot.png), url(images/bg-dot.png), url(images/bg-round.png), url(images/bg-tree.png);
+  background: url({% static 'img/bg-dot.png' %}), url({% static 'img/bg-dot.png' %}), url({% static 'img/bg-round.png' %}), url({% static 'img/bg-tree.png' %});
   background-position: 10px 10px, bottom 215px right 10px, left 55% top -1%, left 45% bottom -1px;
   background-repeat: no-repeat;
   display: flex;
@@ -72,6 +73,7 @@ a {
   justify-content: space-between; 
   padding-bottom: 20px; 
 }
+
 .curveImg {
   position: absolute;
   bottom: 0;
@@ -104,19 +106,24 @@ a {
 }
 
 .btn {
+
   padding: 18px 30px;
   border-radius: 50px;
   border: 2px solid #fff;
   cursor: pointer;
   transition: all 0.3s ease;
   margin-bottom: 30px; /* Agrega un espacio adicional entre los botones */
+  background: #00EDDF;
+  font-weight: 600;
+  
+  
 }
 
 .btn:last-child {
   border: 2px solid #fff;
-  background: transparent;
+  background: #00EDDF;
   
-  color: #fff;
+  color: #00EDDF;
 }
 .btn:last-child:hover {
   cursor: pointer;
@@ -155,7 +162,7 @@ a {
     left: 0;
   }
   a {
-    color: #333;
+    color: #000000;
   }
   #menu_toggle {
     width: 20px;
@@ -163,7 +170,7 @@ a {
   }
   .menu_items #menu_toggle {
     position: absolute;
-    top: 20px;
+    top: 20px;    
     right: 20px;
   }
   .hero {
@@ -217,13 +224,12 @@ a {
       <!-- Header Start -->
       <header>
         <nav class="nav container">
-          <h2 class="nav_logo"><a href="#">Hackaton FEMTECH</a></h2>
+          <h2 class="nav_logo"><a href="{% url 'home' %}">Hackaton FEMTECH</a></h2>
 
           <ul class="menu_items">
-            <img src="static/images/times.svg" alt="timesicon" id="menu_toggle" />
             <li><a href="#" class="nav_link">Home</a></li>
           </ul>
-          <img src="images/bars.svg" alt="timesicon" id="menu_toggle" />
+
         </nav>
       </header>
       <!-- Header End -->

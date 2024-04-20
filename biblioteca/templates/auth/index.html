@@ -5,18 +5,16 @@
 <style>
     :root {
     --main-color: #ffffff;
-    /* Color principal */
+    /* Cambia la letra */
     --text-color:#6200EE ;
-    /* Texto en blanco */
+    /* CAMBIA BOTON GUARDAR     */
     --footer-bg-color: #333;
     /* Color de fondo para el pie de página */
   }
 
   body {
-    background-color: #ffffff;
-    margin: 0;
-    padding: 0;
-    font-family: 'Nunito', sans-serif;;
+    background-color: #6200EE;
+    font-family: 'Nunito', sans-serif;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -24,6 +22,20 @@
     height: 100vh;
     color: var(--text-color);
   }
+
+  .container {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  background: url({% static 'img/bg-dot.png' %}), url({% static 'img/bg-dot.png' %}), url({% static 'img/bg-round.png' %}), url({% static 'img/bg-tree.png' %});
+  background-position: 10px 10px, bottom 215px right 10px, left 55% top -1%, left 45% bottom -1px;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; 
+  padding-bottom: 20px; 
+  
+}
 
     main {
         background: #6610f2;
@@ -54,15 +66,17 @@
     .card{
         background-color: #6610f2;
         border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 0 30px rgb(255, 255, 255);
+
+
     }
+
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link
   href="https://fonts.googleapis.com/css2?family=Akshar:wght@300&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Roboto:wght@100&display=swap"
   rel="stylesheet">
-
 {% endblock %}
 
 {% block contenido %}
@@ -71,8 +85,10 @@
         <div class="col-md-4 mt-5">
             <div class="card p-5">
                 <div class="card-body">
-
-                    <img src="{% static 'img/logo-mach-blanco.png' %}" class="img-fluid mx-auto d-block" alt="Logo" width="60%" >
+                    <a href="{% url 'index' %}">
+                        <img src="{% static 'img/logo-mach-blanco.png' %}" class="img-fluid mx-auto d-block" alt="Logo" width="60%">
+                    </a>
+                    
                     <p class="fw-light text-center mt-3">
                         Iniciar Sesión <br>
 
@@ -87,7 +103,7 @@
                         {% endif %}
 
                         <div class="mb-3">
-                            <label for class="form-label">Usuario</label>
+                            <label for class="form-label">RUT</label>
                             <input type="text" class="form-control" name="usuario" id="usuario" required>
                             <small class="text-danger" id="usuario-error"></small>
                         </div>
